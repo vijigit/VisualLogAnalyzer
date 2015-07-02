@@ -64,7 +64,7 @@ public class LogTextAsJSON {
 
 	public static void main(String[] args) {
 		LogTextAsJSON asJSON = new LogTextAsJSON();
-		List<AllLog> allLogList = asJSON.convertToJSON("/home/evijaka/My_Workspace/IAMV2/iamv2/logging.log");
+		List<AllLog> allLogList = asJSON.convertToJSON("src/main/resources/logging.log");
 		for(AllLog log : allLogList){
 			LOGGER.info(log.toString());
 		}
