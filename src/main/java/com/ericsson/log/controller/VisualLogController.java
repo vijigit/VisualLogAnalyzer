@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ericsson.log.json.reporter.AllLog;
@@ -29,7 +30,7 @@ import com.ericsson.log.json.reporter.LogTextAsJSON;
  */
 @Controller
 public class VisualLogController {
-	@RequestMapping("/logAnalyzer")
+	@RequestMapping(value = "logAnalyzer", method = RequestMethod.GET)
 	public ModelAndView getLogData() {
 
 		LogTextAsJSON asJSON = new LogTextAsJSON();

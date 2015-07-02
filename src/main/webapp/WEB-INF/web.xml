@@ -16,5 +16,10 @@
         <servlet-name>visualLog</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+   
+    <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>/resources/theme/css/*</url-pattern>
+  </servlet-mapping>
   
 </web-app>
