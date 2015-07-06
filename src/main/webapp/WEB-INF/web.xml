@@ -12,6 +12,13 @@
         </servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
+	<servlet>
+		<servlet-name>LogMonitoringServlet</servlet-name>
+		<servlet-class>com.ericsson.log.listener.LogMonitor</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+    
     <servlet-mapping>
         <servlet-name>visualLog</servlet-name>
         <url-pattern>/</url-pattern>
