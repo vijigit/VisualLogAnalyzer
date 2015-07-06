@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ericsson.log.json.reporter.AllLog;
 import com.ericsson.log.json.reporter.LogTextAsJSON;
+import com.ericsson.log.util.PropertiesUtil;
 
 
 /**
@@ -30,11 +31,13 @@ import com.ericsson.log.json.reporter.LogTextAsJSON;
  */
 @Controller
 public class VisualLogController {
+	  public static final String DEST_FOLDER = PropertiesUtil.getProperty(
+	            "destination_directory").toString();
 	@RequestMapping(value = "logAnalyzer", method = RequestMethod.GET)
 	public ModelAndView getLogData() {
 
 		LogTextAsJSON asJSON = new LogTextAsJSON();
-		List<AllLog> allLogList = asJSON.convertToJSON("/home/evijaka/My_Workspace/IAMV2/iamv2/logging.log");
+		List<AllLog> allLogList = asJSON.convertToJSON(DEST_FOLDER + "/logging.log");
 		//return back to index.jsp
 		ModelAndView model = new ModelAndView("welcome");
 		model.addObject("allLogList", allLogList);

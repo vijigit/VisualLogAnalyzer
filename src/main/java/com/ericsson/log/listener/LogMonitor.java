@@ -2,8 +2,6 @@ package com.ericsson.log.listener;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServlet;
 
@@ -13,18 +11,24 @@ import org.apache.commons.io.monitor.FileAlterationListenerAdaptor;
 import org.apache.commons.io.monitor.FileAlterationMonitor;
 import org.apache.commons.io.monitor.FileAlterationObserver;
 
+import com.ericsson.log.util.PropertiesUtil;
+
 public class LogMonitor extends HttpServlet {
 
-    public static final String FOLDER = loadProperties().getProperty(
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static final String FOLDER = PropertiesUtil.getProperty(
             "source_directory").toString();
-    public static final String DEST_FOLDER = loadProperties().getProperty(
+    public static final String DEST_FOLDER = PropertiesUtil.getProperty(
             "destination_directory").toString();
-    public static final String POLLING_INTERVAL = loadProperties().getProperty(
+    public static final String POLLING_INTERVAL = PropertiesUtil.getProperty(
             "polling_interval").toString();
 
     public void init() {
         // The monitor will perform polling on the folder every 5 seconds
-        final long pollingInterval = Long.parseLong(POLLING_INTERVAL);
+        final long pollingInterval = Long.parseLong(POLLING_INTERVAL)*1000;
 
         File folder = new File(FOLDER);
 
@@ -69,7 +73,7 @@ public class LogMonitor extends HttpServlet {
                 try {
                     try {
                         FileUtils.copyFile(new File(file.getCanonicalPath()),
-                                new File(DEST_FOLDER + "/new.txt"));
+                                new File(DEST_FOLDER + "/logging.log"));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -92,37 +96,5 @@ public class LogMonitor extends HttpServlet {
         }
     }
 
-    private static Properties loadProperties() {
-
-        Properties prop = new Properties();
-        InputStream input = null;
-
-        try {
-
-            String filename = "config.properties";
-            input = LogMonitor.class.getClassLoader().getResourceAsStream(
-                    filename);
-            if (input == null) {
-                System.out.println("Sorry, unable to find " + filename);
-                return null;
-            }
-
-            // load a properties file from class path, inside static method
-            prop.load(input);
-
-            return prop;
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            if (input != null) {
-                try {
-                    input.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return prop;
-    }
+  
 }

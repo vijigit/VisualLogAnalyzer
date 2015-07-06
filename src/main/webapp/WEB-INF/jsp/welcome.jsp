@@ -121,15 +121,13 @@ body {
 				<thead>
 					<tr>
 						<td align="center" data-column="0"><input class="column_filter"
-						id="col0_filter" type="text"></td>
+						id="col0_filter" type="text" placeholder="Event Date"></td>
 						<td align="center" data-column="1"><input class="column_filter"
-						id="col1_filter" type="text"></td>
+						id="col1_filter" type="text" placeholder="Severity"></td>
 						<td align="center" data-column="2"><input class="column_filter"
-						id="col2_filter" type="text"></td>
+						id="col2_filter" type="text" placeholder="Event Producer"></td>
 						<td align="center" data-column="3"><input class="column_filter"
-						id="col3_filter" type="text"></td>
-						<td align="center" data-column="3"><input class="column_filter"
-						id="col3_filter" type="text"></td>
+						id="col3_filter" type="text" placeholder="Message"></td>
 					</tr>
 					<tr>
 						<th>Event Date</th>

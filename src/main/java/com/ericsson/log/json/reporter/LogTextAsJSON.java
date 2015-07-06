@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
+import com.ericsson.log.util.PropertiesUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -33,6 +34,8 @@ import com.google.gson.GsonBuilder;
 public class LogTextAsJSON {
 	private static String LOG_REGEX_PATTERN = "^(.*?) (INFO|DEBUG|ERROR)\\s(.+)-\\s(.+)";
 	private static Logger LOGGER = Logger.getLogger(LogTextAsJSON.class);
+	  public static final String DEST_FOLDER = PropertiesUtil.getProperty(
+	            "destination_directory").toString();
 	public List<AllLog> convertToJSON(String inputTextFile) {
 		BufferedReader br  = null;
 		List<AllLog> allLogList =null;
@@ -64,14 +67,13 @@ public class LogTextAsJSON {
 
 	public static void main(String[] args) {
 		LogTextAsJSON asJSON = new LogTextAsJSON();
-		List<AllLog> allLogList = asJSON.convertToJSON("src/main/resources/logging.log");
+		List<AllLog> allLogList = asJSON.convertToJSON(DEST_FOLDER + "/logging.log");
 		for(AllLog log : allLogList){
 			LOGGER.info(log.toString());
 		}
 		Gson gson = new GsonBuilder()
 				.create();
 		String s1 = gson.toJson(allLogList);
-		LOGGER.info("The JSON String is  ===> " + s1);
 	}
 
 }
